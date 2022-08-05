@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-3">
                 <div class="row" style="margin-top: 120px;">
                     SPACE
                 </div>
@@ -22,12 +22,19 @@
                     Score:
                 </div>
             </div>
-            <div class="col" id="gameArea">
+            <div class="col-5" id="gameArea" style="position: -ms-page;">
                 <script src="main.js"></script>
             </div>
-            <div class="col" style="margin-top: 120px;">
-                SHOOTER
-            </div>
+            <div class="col-3">
+                <div class="row" style="margin-top: 120px; text-align: left;">
+                    SHOOTER
+                </div>
+                <div class="row">
+                    <img class="col-1" id="life1" style="margin-top: 120px; width:100px" src="images/lives.png">
+                    <img class="col-1" id="life2" style="margin-top: 120px; width:100px" src="images/lives.png">
+                    <img class="col-1" id="life3" style="margin-top: 120px; width:100px" src="images/lives.png">
+                </div>
+            </div>    
         </div>
     </div>
 </body>

@@ -11,11 +11,13 @@ ctx.fillStyle = "white";
 var shipImage = new Image();
 var bulletImage = new Image();
 var enemyImage = new Image();
+var enemy2Image = new Image();
 var lifeImage = new Image();
 shipImage.src = "images/ship.png";
 bulletImage.src = "images/bullet.png";
 enemyImage.src = "images/enemy.png";
 lifeImage.src = "images/lives.png";
+enemy2Image.src = "images/enemy2.png";
 
 //create the ship game object
 var ship = {
@@ -31,6 +33,7 @@ var bullet = [];
 
 //create enemy game object
 var enemy = [];
+var enemy2 = [];
 
 //create life object
 var life = [];
@@ -91,10 +94,20 @@ function update(){
         enemy.push({
         width: 30,
         height: 30,
+        speed:1,
         x: Math.floor(Math.random()*(canvas.width-60)+15),
         y: 0});
     }
 
+    //spawn big enemies every 150 frames
+    if(frame%150 == 0){
+        enemy.push({
+        width: 50,
+        height: 50,
+        speed: 2,
+        x: Math.floor(Math.random()*(canvas.width-60)+15),
+        y: 0});
+    }
     //update bullet position and delete those which go out of frame
     bullet.forEach(function(bulletObject){
         bulletObject.y -= 10;
@@ -103,22 +116,27 @@ function update(){
             bullet.splice(bullet.indexOf(bulletObject),1);
         }
     }, this); 
-
  
     //update enemy position and delete those which go out of frame
     enemy.forEach(function(enemyObject){
-        enemyObject.y += 1;
+        enemyObject.y += enemyObject.speed;
         ctx.drawImage(enemyImage, enemyObject.x, enemyObject.y, enemyObject.width, enemyObject.height);
         if(enemyObject.y > canvas.height){
             enemy.splice(enemy.indexOf(enemyObject),1);
-            //if enemy goes out of frame, increase death count
+            //if enemy goes out of frame, increase death count and remove a life
             deathCount++;
-            life.forEach(function(lifeObject){
-                life.splice(life.indexOf(lifeObject),1);
-             },this);
+            if(deathCount==1){
+                document.getElementById("life1").remove();
+            }
+            if(deathCount==2){
+                document.getElementById("life2").remove();
+            }
+            if(deathCount==3){
+                document.getElementById("life3").remove();
+            }
         }
     }, this);
-
+    
     //check for collision between bullet and enemy
     bullet.forEach(function(bulletObject){
         enemy.forEach(function(enemyObject){
@@ -130,6 +148,7 @@ function update(){
         }, this);
     } , this);
     document.getElementById("score").innerHTML = "Score:" + count;
+
 
     //delete all bullets and enemies when game is over
     if(deathCount == 3){
