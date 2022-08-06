@@ -129,13 +129,13 @@ function update(){
             //if enemy goes out of frame, increase death count and remove a life
             deathCount++;
             if(deathCount==1){
-                document.getElementById("life1").style.visibility="hidden";
+                document.getElementById("life3").style.opacity="0.2";
             }
             if(deathCount==2){
-                document.getElementById("life2").style.visibility="hidden";
+                document.getElementById("life2").style.opacity="0.2";
             }
             if(deathCount==3){
-                document.getElementById("life3").style.visibility="hidden";
+                document.getElementById("life1").style.opacity="0.2";
             }
         }
     }, this);
