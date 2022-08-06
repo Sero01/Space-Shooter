@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Space Shooter</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,24 +12,39 @@
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
+    <audio autoplay loop id="bgm">
+        <source src="sounds/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="explosion">
+        <source src="sounds/explosion.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="shoot">
+        <source src="sounds/gun shot.mp3" type="audio/mpeg">
+    </audio>
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-4">
                 <div class="row" style="margin-top: 120px;">
                     SPACE
                 </div>
                 <div class="row" id="score" style="margin-top: 120px;">
                     Score:
                 </div>
+                <div class="row" id="highscore" style="margin-top: 120px;">
+                    HighScore:
+                </div>
             </div>
-            <div class="col-5" id="gameArea" style="position: -ms-page;">
+            <div class="col-sm-4" id="gameArea" style="position: -ms-page;">
                 <script src="main.js"></script>
             </div>
-            <div class="col-3">
-                <div class="row" style="margin-top: 120px; text-align: left;">
+            <div class="col-sm-4">
+                <div class="row" style="margin-top: 60px;">
+                    <img style="width: 50px;" src="images/enemy2.png" id="replay">
+                </div>
+                <div class="row" style="margin-top: 60px; text-align: left;">
                     SHOOTER
                 </div>
-                <div class="row">
+                <div class="row" id="lives">
                     <img class="col-1" id="life1" style="margin-top: 120px; width:100px" src="images/lives.png">
                     <img class="col-1" id="life2" style="margin-top: 120px; width:100px" src="images/lives.png">
                     <img class="col-1" id="life3" style="margin-top: 120px; width:100px" src="images/lives.png">
@@ -37,5 +52,19 @@
             </div>    
         </div>
     </div>
+    <script>
+        localStorage.setItem("highscore", 0);
+        addEventListener("click", function() {
+            var audio = document.getElementById("bgm");
+            if(audio.paused){
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+        document.getElementById("replay").addEventListener("click", function() {
+            replay();
+        });
+    </script>
 </body>
 </html>

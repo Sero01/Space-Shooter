@@ -10,6 +10,6 @@ body{
     background-image: url("images/background.png");
     background-size: cover;
 }
-#score{
-    font-size: 40px;
+#score, #highscore{
+    font-size: 30px;
 }
